@@ -1,0 +1,87 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.summercoding.bank.controleur;
+
+import com.summercoding.bank.entity.Admin;
+import com.summercoding.bank.entity.Compte;
+import com.summercoding.bank.entity.Utilisateur;
+import com.summercoding.bank.gestionnaire.GestionnaireAdmin;
+import com.summercoding.bank.gestionnaire.GestionnaireCompte;
+import com.summercoding.bank.gestionnaire.GestionnaireUtilisateur;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.List;
+
+//the controleur holds the route to each gestionnaire method because the client communicates directly only with the controleur
+//that is if the client wants to login , the controleur has the route to the login and then calls the needed gestionnaire that holds the method
+
+/**
+ *
+ * @author cynthiaabi
+ */
+public class Controleur {
+    
+    GestionnaireAdmin getGestionnaireAdmin = new GestionnaireAdmin();
+    
+    GestionnaireUtilisateur getGestionnaireUtilisateur = new GestionnaireUtilisateur();
+    
+    GestionnaireCompte getGestionnaireCompte = new GestionnaireCompte();
+    
+    
+    
+    public Admin routeVersLogin (String login, String password) throws SQLException{
+        
+        return getGestionnaireAdmin.login(login, password);
+    }
+    
+    public void routeVersSave (String login, String password, String nom) throws SQLException{
+        
+        getGestionnaireAdmin.saveAdmin(login, password, nom);
+    }
+    
+    public List<Admin> routeVersListAdmin() throws SQLException {
+        
+        return getGestionnaireAdmin.GetAllAdminList();
+        
+    } 
+    
+    
+    
+    
+    public Utilisateur routeVersUtilisateurLogin (String login, String password) throws SQLException{
+        
+        return getGestionnaireUtilisateur.loginUtilisateur(login, password);
+    }
+    
+    public void saveUtilisateur (String login, String nom, String prenom, String password, LocalDate datenaiss, String genre, int idadmin) throws SQLException {
+        
+           getGestionnaireUtilisateur.saveUtilisateur(login, nom, prenom, password, datenaiss, genre, idadmin);
+        
+    }
+    
+    public List<Utilisateur> routeVersGetListUtilisateur () throws SQLException {
+        
+        return getGestionnaireUtilisateur.getAllUtilisateurList();
+    }
+    
+    
+    
+    
+    public Compte routeVersLoginCompte (double solde, int iduser) throws SQLException {
+        
+        return getGestionnaireCompte.loginCompte(solde, iduser);
+    }
+    
+    public void routeVersSaveCompte (double solde, int iduser, int idadmin) throws SQLException {
+        
+        getGestionnaireCompte.saveCompte(solde, iduser, idadmin);
+    }
+    
+    public List<Compte> routeVersGetListCompte () throws SQLException {
+        
+        return getGestionnaireCompte.getAllCompteListe();
+    }
+    
+}
