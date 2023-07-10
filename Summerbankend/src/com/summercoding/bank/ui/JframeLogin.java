@@ -18,7 +18,9 @@ import javax.swing.JOptionPane;
  */
 public class JframeLogin extends javax.swing.JFrame {
     
-    Controleur controleur = new Controleur(); 
+    Controleur controleur = new Controleur();
+    
+    JframeHome HomePage = new JframeHome();
 
     /**
      * Creates new form JframeLogin
@@ -52,6 +54,7 @@ public class JframeLogin extends javax.swing.JFrame {
         ComboBoxLogin = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Login");
 
         jLabel1.setText("Login");
 
@@ -65,6 +68,11 @@ public class JframeLogin extends javax.swing.JFrame {
         });
 
         CancelButton.setText("Cancel");
+        CancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelButtonActionPerformed(evt);
+            }
+        });
 
         ComboBoxLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,66 +147,77 @@ public class JframeLogin extends javax.swing.JFrame {
             
             String type = ComboBoxLogin.getSelectedItem().toString();
             
-            if (type.equals("Admin")) {
-                
-                try {
-                    
-                    
-                    String login = champLogin.getText();
-                    String password = champPassword.getText();
+            String login = champLogin.getText();
+            String password = champPassword.getText();
             
-                    Admin admin = controleur.routeVersLogin(login, password);
             
-                    if (admin == null){
+            if (login.equals("")||password.equals("")){
                 
-                        JOptionPane.showMessageDialog(null, "Login or Password incorrect");
-                
-                    }
-                    
-                    else {
-                        
-                        JOptionPane.showMessageDialog(null, "Admin Connection Succesfull");
-                        
-                    }
-            
-                } 
-        
-                catch (SQLException ex) {
-                Logger.getLogger(JframeLogin.class.getName()).log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(null, "Please try again later");
-                
-                }
-                
+                JOptionPane.showMessageDialog(null, "Login or Password empty");
             }
             
-            else if (type.equals("Utilisateur")) {
+            else { //login and password not empty
+            
+                if (type.equals("Admin")) {
                 
-                try {
-                    String login = champLogin.getText();
-                    String password = champPassword.getText();
+                    try {
                     
-                    Utilisateur utilisateur = controleur.routeVersUtilisateurLogin(login, password);
+            
+                        Admin admin = controleur.routeVersLogin(login, password);
+            
+                        if (admin == null){
+                
+                            JOptionPane.showMessageDialog(null, "Login or Password incorrect");
+                
+                        }
                     
+                         else {
+                        
+                            //JOptionPane.showMessageDialog(null, "Admin Connection Succesfull");
+                            
+                            this.setVisible(false); //JframeLogin setVisible false
+                            
+                            HomePage.setVisible(true);
+                        
+                        }
+            
+                    } 
+        
+                    catch (SQLException ex) {
+                    Logger.getLogger(JframeLogin.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, "Please try again later");
 
-                    if (utilisateur == null) {
-                        
-                        JOptionPane.showMessageDialog(null, "Login or Password incorrect");
                     }
-                    
-                    else {
-                        
-                        JOptionPane.showMessageDialog(null, "User Connection Succesfull");
-                    }
-                    
-                } 
                 
-                catch (SQLException ex) {
+                }
+            
+                else { //if (type.equals("Utilisateur")) 
+                
+                    try {
+                    
+                    
+                        Utilisateur utilisateur = controleur.routeVersUtilisateurLogin(login, password);
+
+
+                        if (utilisateur == null) {
+
+                            JOptionPane.showMessageDialog(null, "Login or Password incorrect");
+                        }
+
+                        else {
+
+                            JOptionPane.showMessageDialog(null, "User Connection Succesfull");
+                        }
+
+                    } 
+                
+                    catch (SQLException ex) {
                     Logger.getLogger(JframeLogin.class.getName()).log(Level.SEVERE, null, ex);
                     
+                    }
+                    
                 }
-                
-                
-                
+            
             }
             
     }//GEN-LAST:event_buttonOkActionPerformed
@@ -207,6 +226,12 @@ public class JframeLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_ComboBoxLoginActionPerformed
+
+    private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
+        // TODO add your handling code here:
+        
+        this.dispose();
+    }//GEN-LAST:event_CancelButtonActionPerformed
 
     /**
      * @param args the command line arguments

@@ -44,7 +44,8 @@ public class JframeSaveAdmin extends javax.swing.JFrame {
         ChampOkButton = new javax.swing.JButton();
         ChampCancelButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("SignUp Admin");
 
         jLabel1.setText("Login");
 

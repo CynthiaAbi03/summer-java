@@ -100,7 +100,8 @@ public class JframeSavesUtilisateur extends javax.swing.JFrame {
         ButtonOk = new javax.swing.JButton();
         ButtonCancel = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("SignUp Utilisateur");
 
         jLabel1.setText("Login\n");
 
