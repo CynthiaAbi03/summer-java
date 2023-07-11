@@ -47,6 +47,15 @@ public class Controleur {
         
     } 
     
+    public Admin routeVersGetOne (int idadmin) throws SQLException {
+        
+        return getGestionnaireAdmin.GetOneAdmin(idadmin);
+    }
+    
+    public void routeVersUpdate (int idadmin, String login, String password, String nom) throws SQLException {
+        
+        getGestionnaireAdmin.updateAdmin(idadmin, login, password, nom);
+    }
     
     
     
@@ -60,7 +69,7 @@ public class Controleur {
            getGestionnaireUtilisateur.saveUtilisateur(login, nom, prenom, password, datenaiss, genre, idadmin);
         
     }
-    
+        
     public List<Utilisateur> routeVersGetListUtilisateur () throws SQLException {
         
         return getGestionnaireUtilisateur.getAllUtilisateurList();

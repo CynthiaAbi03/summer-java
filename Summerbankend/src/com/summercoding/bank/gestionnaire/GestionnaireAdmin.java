@@ -45,6 +45,17 @@ public class GestionnaireAdmin {
         return admin.getAllAdmin();
         
     }
+    
+    public Admin GetOneAdmin (int idadmin) throws SQLException {
+        
+        return admin.getOne(idadmin);
+    }
+    
+    public void updateAdmin (int idadmin,String login,String password,String nom) throws SQLException {
+        
+        admin.update(idadmin, login, password, nom);
+        
+    }
             
             
 }

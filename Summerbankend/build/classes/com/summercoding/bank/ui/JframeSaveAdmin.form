@@ -39,27 +39,34 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jLabel1" max="32767" attributes="0"/>
-                      <Component id="jLabel2" max="32767" attributes="0"/>
-                      <Component id="jLabel3" pref="76" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jLabel1" max="32767" attributes="0"/>
+                          <Component id="jLabel2" max="32767" attributes="0"/>
+                          <Component id="jLabel3" pref="76" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                          <Component id="labelIdAdmin" min="-2" max="-2" attributes="0"/>
+                          <Component id="cancelAdminButton" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="36" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="ChampLogin" max="32767" attributes="0"/>
                       <Component id="ChampNom" max="32767" attributes="0"/>
                       <Component id="ChampPassword" pref="276" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="deleteAdminButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="updateAdminButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="buttonAddAdmin" min="-2" pref="82" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="champIdAdmin" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="212" max="32767" attributes="0"/>
-                  <Component id="ChampCancelButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                  <Component id="ChampOkButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -81,12 +88,19 @@
                       <Component id="jLabel3" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="ChampPassword" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="ChampOkButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="ChampCancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="champIdAdmin" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="labelIdAdmin" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="158" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="buttonAddAdmin" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="updateAdminButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="deleteAdminButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cancelAdminButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="101" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -113,21 +127,44 @@
         </Component>
         <Component class="javax.swing.JPasswordField" name="ChampPassword">
         </Component>
-        <Component class="javax.swing.JButton" name="ChampOkButton">
+        <Component class="javax.swing.JButton" name="buttonAddAdmin">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Ok"/>
+            <Property name="text" type="java.lang.String" value="Add"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ChampOkButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAddAdminActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="ChampCancelButton">
+        <Component class="javax.swing.JButton" name="cancelAdminButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cancel"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ChampCancelButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelAdminButtonActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="deleteAdminButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Delete"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="updateAdminButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Update"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateAdminButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="champIdAdmin">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="labelIdAdmin">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Id Admin"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

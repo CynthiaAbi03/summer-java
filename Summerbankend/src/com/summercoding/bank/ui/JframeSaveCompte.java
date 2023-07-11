@@ -72,7 +72,8 @@ public class JframeSaveCompte extends javax.swing.JFrame {
         ButtonOk = new javax.swing.JButton();
         ButtonCancel = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Create Compte");
 
         jLabel1.setText("Solde");
 

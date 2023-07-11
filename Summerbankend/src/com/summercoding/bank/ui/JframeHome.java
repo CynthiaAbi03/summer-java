@@ -6,12 +6,16 @@ package com.summercoding.bank.ui;
 
 import com.summercoding.bank.controleur.Controleur;
 import com.summercoding.bank.entity.Admin;
+import com.summercoding.bank.entity.Compte;
+import com.summercoding.bank.entity.Utilisateur;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -19,9 +23,20 @@ import javax.swing.table.DefaultTableModel;
  */
 public class JframeHome extends javax.swing.JFrame {
     
-    JframeSaveAdmin SignUpAdmin = new JframeSaveAdmin();
+    
     JframeSavesUtilisateur SignUpUtilisateur = new JframeSavesUtilisateur();
     Controleur controleur = new Controleur ();
+    JframeSaveCompte createCompte = new JframeSaveCompte();
+    String whatMenu;
+
+    public JTable getTable() {
+        return Table;
+    }
+
+    public void setTable(JTable Table) {
+        this.Table = Table;
+    }
+    
     
 
     /**
@@ -114,6 +129,11 @@ public class JframeHome extends javax.swing.JFrame {
 
             }
         ));
+        Table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(Table);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -172,9 +192,19 @@ public class JframeHome extends javax.swing.JFrame {
         jMenu7.setText("Compte");
 
         MenuCreateCompte.setText("Create");
+        MenuCreateCompte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuCreateCompteActionPerformed(evt);
+            }
+        });
         jMenu7.add(MenuCreateCompte);
 
         MenuListCompte.setText("List");
+        MenuListCompte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuListCompteActionPerformed(evt);
+            }
+        });
         jMenu7.add(MenuListCompte);
 
         jMenuBar1.add(jMenu7);
@@ -204,7 +234,7 @@ public class JframeHome extends javax.swing.JFrame {
     private void MenuListCreateAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuListCreateAdminActionPerformed
         // TODO add your handling code here:
         
-        SignUpAdmin.setVisible(true);
+        new JframeSaveAdmin("add",0,this).setVisible(true);
     }//GEN-LAST:event_MenuListCreateAdminActionPerformed
 
     private void MenuCreateUtilisateurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCreateUtilisateurActionPerformed
@@ -231,9 +261,11 @@ public class JframeHome extends javax.swing.JFrame {
             
             Table.setModel(new DefaultTableModel(datas, columns)); */
             
+            whatMenu = "admin";
+            
             List<Admin> listAdmin = controleur.routeVersListAdmin();
             
-            DefaultTableModel model = (DefaultTableModel) Table.getModel();
+            DefaultTableModel model = new DefaultTableModel();
             
             model.addColumn("id");
             model.addColumn("Nom");
@@ -241,7 +273,7 @@ public class JframeHome extends javax.swing.JFrame {
             
             for(Admin ad : listAdmin ) {
                 
-                model.addRow(new String[]{ad.getIdadmin() + "",ad.getNom(), ad.getLogin() });
+                model.addRow(new String[]{ad.getIdadmin() + "",ad.getNom(), ad.getLogin() }); // + "" is used to change ad.getIdadmin() to a string by concatenating it to an empty string "" which forces the conversion
             }
             
             Table.setModel(model);
@@ -261,10 +293,91 @@ public class JframeHome extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuListAdminActionPerformed
 
     private void MenuListUtilisateurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuListUtilisateurActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            
+            List<Utilisateur> listUtilisateur = controleur.routeVersGetListUtilisateur();
+            
+            DefaultTableModel model = (DefaultTableModel) Table.getModel();
+            
+            model.addColumn("id");
+            model.addColumn("login");
+            model.addColumn("nom");
+            model.addColumn("prenom");
+            model.addColumn("datenaiss");
+            model.addColumn("genre");
+            
+            for (Utilisateur utilisateur : listUtilisateur) {
+                
+                model.addRow(new Object[]{utilisateur.getIduser() + "", utilisateur.getLogin(), utilisateur.getNom(), utilisateur.getPrenom(),utilisateur.getDatenaiss(),utilisateur.getGenre() });
+            }
+            
+            Table.setModel(model);
+        } 
+        
+        catch (SQLException ex) {
+            Logger.getLogger(JframeHome.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         
         
     }//GEN-LAST:event_MenuListUtilisateurActionPerformed
+
+    private void MenuCreateCompteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCreateCompteActionPerformed
+        // TODO add your handling code here:
+        createCompte.setVisible(true);
+        
+        
+        
+    }//GEN-LAST:event_MenuCreateCompteActionPerformed
+
+    private void MenuListCompteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuListCompteActionPerformed
+        try {
+            // TODO add your handling code here:
+            
+            List<Compte> listCompte = controleur.routeVersGetListCompte();
+            
+            DefaultTableModel model = (DefaultTableModel) Table.getModel();
+            
+            model.addColumn("idCompte");
+            model.addColumn("Solde");
+            model.addColumn("idUser");
+            model.addColumn("idAdmin");
+            
+            for (Compte compte : listCompte) {
+                
+                model.addRow(new Object[]{compte.getIdcompte() + "", compte.getSolde(), compte.getIduser(), compte.getIdadmin() });
+            }
+        } 
+        
+        catch (SQLException ex) {
+            Logger.getLogger(JframeHome.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_MenuListCompteActionPerformed
+
+    private void TableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableMouseClicked
+        // TODO add your handling code here:
+        
+        int lineNumber = Table.getSelectedRow();
+        
+        TableModel model = Table.getModel();
+        
+        if(whatMenu.equals("admin")) {
+            
+            String idAdminString = model.getValueAt(lineNumber,0).toString();
+            
+            int idAdmin = Integer.parseInt(idAdminString);
+            
+            new JframeSaveAdmin("update", idAdmin, this).setVisible(true);
+            
+           /* JframeSaveAdmin jf = new JframeSaveAdmin("update",idAdmin,this);
+            jf.setVisible(true); */
+           
+           
+            
+            
+        }
+    }//GEN-LAST:event_TableMouseClicked
 
     /**
      * @param args the command line arguments
