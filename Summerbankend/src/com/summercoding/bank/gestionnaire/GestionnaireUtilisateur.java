@@ -37,4 +37,20 @@ public class GestionnaireUtilisateur {
         
         return utilisateur.getAllUtilisateur();
     }
+    
+    public Utilisateur getOneUtilisateur(int iduser) throws SQLException {
+        
+        return utilisateur.getOne(iduser);
+        
+    }
+    
+    public void deleteUtilisateur(int iduser) throws SQLException {
+        
+        utilisateur.delete(iduser);
+    }
+    
+    public void updateUtilisateur (int iduser, String login, String nom, String prenom, String password, LocalDate datenaiss, String genre, int idadmin) throws SQLException {
+        
+        utilisateur.update(iduser, login, nom, prenom, password, datenaiss, genre, idadmin);
+    }
 }

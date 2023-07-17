@@ -57,6 +57,11 @@ public class Controleur {
         getGestionnaireAdmin.updateAdmin(idadmin, login, password, nom);
     }
     
+    public void routeVersDeleteAdmin (int idadmin) throws SQLException {
+        
+        getGestionnaireAdmin.deleteAdmin(idadmin);
+    }
+    
     
     
     public Utilisateur routeVersUtilisateurLogin (String login, String password) throws SQLException{
@@ -75,6 +80,23 @@ public class Controleur {
         return getGestionnaireUtilisateur.getAllUtilisateurList();
     }
     
+    public void routeVersUpdateUtilisateur(int iduser, String login, String nom, String prenom, String password, LocalDate datenaiss, String genre, int idadmin) throws SQLException{
+        
+        getGestionnaireUtilisateur.updateUtilisateur(iduser, login, nom, prenom, password, datenaiss, genre, idadmin);
+    }
+    
+    public Utilisateur routeVersGetOneUtilisateur (int iduser) throws SQLException {
+        
+        return getGestionnaireUtilisateur.getOneUtilisateur(iduser);
+    }
+    
+    public void routeVersDeleteUtilisateur (int iduser) throws SQLException {
+        
+        getGestionnaireUtilisateur.deleteUtilisateur(iduser);
+    }
+    
+    
+    
     
     
     
@@ -91,6 +113,21 @@ public class Controleur {
     public List<Compte> routeVersGetListCompte () throws SQLException {
         
         return getGestionnaireCompte.getAllCompteListe();
+    }
+    
+    public void routeVersUpdateCompte (int idcompte, double solde, int iduser, int idadmin) throws SQLException {
+        
+        getGestionnaireCompte.updateCompte(idcompte, solde, iduser, idadmin);
+    }
+    
+    public Compte routeVersGetOneCompte (int idcompte) throws SQLException {
+        
+        return getGestionnaireCompte.getOneCompte(idcompte);
+    }
+    
+    public void routeVersDeleteCompte(int idcompte) throws SQLException {
+        
+        getGestionnaireCompte.deleteCompte(idcompte);
     }
     
 }

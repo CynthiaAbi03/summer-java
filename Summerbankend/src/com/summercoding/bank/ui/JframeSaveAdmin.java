@@ -111,6 +111,11 @@ public class JframeSaveAdmin extends javax.swing.JFrame {
         });
 
         deleteAdminButton.setText("Delete");
+        deleteAdminButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteAdminButtonActionPerformed(evt);
+            }
+        });
 
         updateAdminButton.setText("Update");
         updateAdminButton.addActionListener(new java.awt.event.ActionListener() {
@@ -256,12 +261,33 @@ public class JframeSaveAdmin extends javax.swing.JFrame {
         
         catch (SQLException ex) {
             Logger.getLogger(JframeSaveAdmin.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null,"internal error. Try again lator");
+            JOptionPane.showMessageDialog(null,"internal error. Try again later");
         }
         
         
         
     }//GEN-LAST:event_updateAdminButtonActionPerformed
+
+    private void deleteAdminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAdminButtonActionPerformed
+        try {
+            // TODO add your handling code here:
+            
+            String id = champIdAdmin.getText();
+            
+            int idadmin = Integer.parseInt(id);
+            
+            controleur.routeVersDeleteAdmin(idadmin);
+            
+            this.dispose();
+            
+            refreshTable();
+            
+        } 
+        
+        catch (SQLException ex) {
+            Logger.getLogger(JframeSaveAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_deleteAdminButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -322,6 +348,7 @@ public class JframeSaveAdmin extends javax.swing.JFrame {
             Logger.getLogger(JframeSaveAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ChampLogin;

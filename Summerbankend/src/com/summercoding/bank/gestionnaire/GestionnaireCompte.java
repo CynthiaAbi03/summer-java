@@ -30,4 +30,19 @@ public class GestionnaireCompte {
         
         return compte.getAllCompte();
     }
+    
+    public void updateCompte (int idcompte, double solde, int iduser, int idadmin) throws SQLException {
+        
+        compte.update(idcompte, solde, iduser, idadmin);
+    }
+    
+    public Compte getOneCompte (int idcompte) throws SQLException {
+        
+        return compte.getOne(idcompte);
+    }
+    
+    public void deleteCompte(int iduser) throws SQLException {
+        
+        compte.delete(iduser);
+    }
 }

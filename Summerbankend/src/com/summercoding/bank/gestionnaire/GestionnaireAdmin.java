@@ -56,6 +56,11 @@ public class GestionnaireAdmin {
         admin.update(idadmin, login, password, nom);
         
     }
+    
+    public void deleteAdmin (int idadmin) throws SQLException {
+        
+        admin.delete(idadmin);
+    }
             
             
 }

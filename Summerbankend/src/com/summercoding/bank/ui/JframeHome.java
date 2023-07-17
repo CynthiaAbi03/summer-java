@@ -24,9 +24,9 @@ import javax.swing.table.TableModel;
 public class JframeHome extends javax.swing.JFrame {
     
     
-    JframeSavesUtilisateur SignUpUtilisateur = new JframeSavesUtilisateur();
+    
     Controleur controleur = new Controleur ();
-    JframeSaveCompte createCompte = new JframeSaveCompte();
+      
     String whatMenu;
 
     public JTable getTable() {
@@ -240,7 +240,7 @@ public class JframeHome extends javax.swing.JFrame {
     private void MenuCreateUtilisateurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCreateUtilisateurActionPerformed
         // TODO add your handling code here:
         
-        SignUpUtilisateur.setVisible(true);
+        new JframeSavesUtilisateur ("add",0,this).setVisible(true);
     }//GEN-LAST:event_MenuCreateUtilisateurActionPerformed
 
     private void MenuListAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuListAdminActionPerformed
@@ -296,9 +296,11 @@ public class JframeHome extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             
+            whatMenu = "utilisateur"; 
+            
             List<Utilisateur> listUtilisateur = controleur.routeVersGetListUtilisateur();
             
-            DefaultTableModel model = (DefaultTableModel) Table.getModel();
+            DefaultTableModel model = new DefaultTableModel();
             
             model.addColumn("id");
             model.addColumn("login");
@@ -306,6 +308,7 @@ public class JframeHome extends javax.swing.JFrame {
             model.addColumn("prenom");
             model.addColumn("datenaiss");
             model.addColumn("genre");
+            
             
             for (Utilisateur utilisateur : listUtilisateur) {
                 
@@ -325,7 +328,7 @@ public class JframeHome extends javax.swing.JFrame {
 
     private void MenuCreateCompteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCreateCompteActionPerformed
         // TODO add your handling code here:
-        createCompte.setVisible(true);
+        new JframeSaveCompte("add",0,this).setVisible(true);
         
         
         
@@ -335,9 +338,11 @@ public class JframeHome extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             
+            whatMenu = "compte";
+            
             List<Compte> listCompte = controleur.routeVersGetListCompte();
             
-            DefaultTableModel model = (DefaultTableModel) Table.getModel();
+            DefaultTableModel model = new DefaultTableModel();
             
             model.addColumn("idCompte");
             model.addColumn("Solde");
@@ -348,6 +353,8 @@ public class JframeHome extends javax.swing.JFrame {
                 
                 model.addRow(new Object[]{compte.getIdcompte() + "", compte.getSolde(), compte.getIduser(), compte.getIdadmin() });
             }
+            
+            Table.setModel(model);
         } 
         
         catch (SQLException ex) {
@@ -371,12 +378,30 @@ public class JframeHome extends javax.swing.JFrame {
             new JframeSaveAdmin("update", idAdmin, this).setVisible(true);
             
            /* JframeSaveAdmin jf = new JframeSaveAdmin("update",idAdmin,this);
-            jf.setVisible(true); */
-           
-           
+            jf.setVisible(true); */          
+               
+        }
+        
+        else if (whatMenu.equals("utilisateur")) {
             
+            
+            String idUserString = model.getValueAt(lineNumber, 0).toString();
+            
+            int idUser = Integer.parseInt(idUserString);
+            
+            new JframeSavesUtilisateur("update", idUser,this).setVisible(true);
+        }
+        
+        else if (whatMenu.equals("compte")) {
+            
+            String idcompteString = model.getValueAt(lineNumber, 0).toString();
+            
+            int idCompte = Integer.parseInt(idcompteString);
+            
+            new JframeSaveCompte("update",idCompte,this).setVisible(true);
             
         }
+        
     }//GEN-LAST:event_TableMouseClicked
 
     /**
