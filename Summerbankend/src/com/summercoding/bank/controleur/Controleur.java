@@ -130,4 +130,10 @@ public class Controleur {
         getGestionnaireCompte.deleteCompte(idcompte);
     }
     
+    public List<Compte> routeVersGetComptebyIdUser (int iduser) throws SQLException {
+        
+        return getGestionnaireCompte.getCompteByIdUserList(iduser);
+        
+    }
+    
 }

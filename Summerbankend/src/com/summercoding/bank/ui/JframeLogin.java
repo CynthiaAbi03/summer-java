@@ -16,12 +16,12 @@ import javax.swing.JOptionPane;
  *
  * @author cynthiaabi
  */
+
 public class JframeLogin extends javax.swing.JFrame {
     
     Controleur controleur = new Controleur();
     
-    JframeHome HomePage = new JframeHome();
-
+    
     /**
      * Creates new form JframeLogin
      */
@@ -147,9 +147,14 @@ public class JframeLogin extends javax.swing.JFrame {
             
             String type = ComboBoxLogin.getSelectedItem().toString();
             
+             
             String login = champLogin.getText();
             String password = champPassword.getText();
             
+            System.out.println(login);
+           
+            
+        
             
             if (login.equals("")||password.equals("")){
                 
@@ -177,7 +182,9 @@ public class JframeLogin extends javax.swing.JFrame {
                             
                             this.setVisible(false); //JframeLogin setVisible false
                             
-                            HomePage.setVisible(true);
+                            JframeHome homePage = new JframeHome("admin", 0);
+                            
+                            homePage.setVisible(true);
                         
                         }
             
@@ -197,7 +204,9 @@ public class JframeLogin extends javax.swing.JFrame {
                     
                     
                         Utilisateur utilisateur = controleur.routeVersUtilisateurLogin(login, password);
-
+                        
+                        int idUser = utilisateur.getIduser();
+                        
 
                         if (utilisateur == null) {
 
@@ -206,7 +215,14 @@ public class JframeLogin extends javax.swing.JFrame {
 
                         else {
 
-                            JOptionPane.showMessageDialog(null, "User Connection Succesfull");
+                            this.setVisible(false);
+                            
+                            JframeHome homePage = new JframeHome("utilisateur", idUser);
+                            
+                            homePage.setVisible(true);
+                            
+                            
+           
                         }
 
                     } 
@@ -231,6 +247,9 @@ public class JframeLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         this.dispose();
+        
+        
+        
     }//GEN-LAST:event_CancelButtonActionPerformed
 
     /**
@@ -262,7 +281,8 @@ public class JframeLogin extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-
+      
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -270,6 +290,8 @@ public class JframeLogin extends javax.swing.JFrame {
             }
         });
     }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CancelButton;

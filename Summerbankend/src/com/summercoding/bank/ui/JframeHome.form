@@ -122,7 +122,7 @@
     </Container>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="MenuAdmin">
+        <Menu class="javax.swing.JMenu" name="menuAdmin">
           <Properties>
             <Property name="text" type="java.lang.String" value="Admin"/>
           </Properties>
@@ -145,7 +145,7 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="MenuUtilisateur">
+        <Menu class="javax.swing.JMenu" name="menuUtilisateur">
           <Properties>
             <Property name="text" type="java.lang.String" value="Utilisateur"/>
           </Properties>
@@ -168,17 +168,17 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu7">
+        <Menu class="javax.swing.JMenu" name="menuCompte">
           <Properties>
             <Property name="text" type="java.lang.String" value="Compte"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="MenuCreateCompte">
+            <MenuItem class="javax.swing.JMenuItem" name="menuCreateCompte">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Create"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuCreateCompteActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuCreateCompteActionPerformed"/>
               </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="MenuListCompte">

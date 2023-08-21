@@ -31,6 +31,11 @@ public class GestionnaireCompte {
         return compte.getAllCompte();
     }
     
+    public List<Compte> getCompteByIdUserList (int iduser) throws SQLException {
+        
+        return compte.getComptebyIdUser(iduser);
+    } 
+    
     public void updateCompte (int idcompte, double solde, int iduser, int idadmin) throws SQLException {
         
         compte.update(idcompte, solde, iduser, idadmin);

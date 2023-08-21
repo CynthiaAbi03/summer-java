@@ -28,7 +28,20 @@ public class JframeHome extends javax.swing.JFrame {
     Controleur controleur = new Controleur ();
       
     String whatMenu;
+    String whatProfile;
+    int idUser1;
 
+    public int getIdUser1() {
+        return idUser1;
+    }
+
+    public void setIdUser1(int idUser1) {
+        this.idUser1 = idUser1;
+    }
+    
+    
+    
+    
     public JTable getTable() {
         return Table;
     }
@@ -42,8 +55,25 @@ public class JframeHome extends javax.swing.JFrame {
     /**
      * Creates new form JframeHome
      */
-    public JframeHome() {
+    public JframeHome(String type, int idUser) {
         initComponents();
+        
+        
+        if(type.equalsIgnoreCase("utilisateur")) {
+        
+        menuAdmin.setVisible(false);
+        menuUtilisateur.setVisible(false);
+        menuCreateCompte.setVisible(false);
+        
+        whatProfile = "utilisateur";
+        
+        idUser1 = idUser;
+    }
+        
+        else {
+            
+            
+        }
     }
 
     /**
@@ -73,14 +103,14 @@ public class JframeHome extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         Table = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
-        MenuAdmin = new javax.swing.JMenu();
+        menuAdmin = new javax.swing.JMenu();
         MenuListCreateAdmin = new javax.swing.JMenuItem();
         MenuListAdmin = new javax.swing.JMenuItem();
-        MenuUtilisateur = new javax.swing.JMenu();
+        menuUtilisateur = new javax.swing.JMenu();
         MenuCreateUtilisateur = new javax.swing.JMenuItem();
         MenuListUtilisateur = new javax.swing.JMenuItem();
-        jMenu7 = new javax.swing.JMenu();
-        MenuCreateCompte = new javax.swing.JMenuItem();
+        menuCompte = new javax.swing.JMenu();
+        menuCreateCompte = new javax.swing.JMenuItem();
         MenuListCompte = new javax.swing.JMenuItem();
         jMenu9 = new javax.swing.JMenu();
         jMenu10 = new javax.swing.JMenu();
@@ -149,7 +179,7 @@ public class JframeHome extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        MenuAdmin.setText("Admin");
+        menuAdmin.setText("Admin");
 
         MenuListCreateAdmin.setText("Create");
         MenuListCreateAdmin.addActionListener(new java.awt.event.ActionListener() {
@@ -157,7 +187,7 @@ public class JframeHome extends javax.swing.JFrame {
                 MenuListCreateAdminActionPerformed(evt);
             }
         });
-        MenuAdmin.add(MenuListCreateAdmin);
+        menuAdmin.add(MenuListCreateAdmin);
 
         MenuListAdmin.setText("List");
         MenuListAdmin.addActionListener(new java.awt.event.ActionListener() {
@@ -165,11 +195,11 @@ public class JframeHome extends javax.swing.JFrame {
                 MenuListAdminActionPerformed(evt);
             }
         });
-        MenuAdmin.add(MenuListAdmin);
+        menuAdmin.add(MenuListAdmin);
 
-        jMenuBar1.add(MenuAdmin);
+        jMenuBar1.add(menuAdmin);
 
-        MenuUtilisateur.setText("Utilisateur");
+        menuUtilisateur.setText("Utilisateur");
 
         MenuCreateUtilisateur.setText("Create");
         MenuCreateUtilisateur.addActionListener(new java.awt.event.ActionListener() {
@@ -177,7 +207,7 @@ public class JframeHome extends javax.swing.JFrame {
                 MenuCreateUtilisateurActionPerformed(evt);
             }
         });
-        MenuUtilisateur.add(MenuCreateUtilisateur);
+        menuUtilisateur.add(MenuCreateUtilisateur);
 
         MenuListUtilisateur.setText("List");
         MenuListUtilisateur.addActionListener(new java.awt.event.ActionListener() {
@@ -185,19 +215,19 @@ public class JframeHome extends javax.swing.JFrame {
                 MenuListUtilisateurActionPerformed(evt);
             }
         });
-        MenuUtilisateur.add(MenuListUtilisateur);
+        menuUtilisateur.add(MenuListUtilisateur);
 
-        jMenuBar1.add(MenuUtilisateur);
+        jMenuBar1.add(menuUtilisateur);
 
-        jMenu7.setText("Compte");
+        menuCompte.setText("Compte");
 
-        MenuCreateCompte.setText("Create");
-        MenuCreateCompte.addActionListener(new java.awt.event.ActionListener() {
+        menuCreateCompte.setText("Create");
+        menuCreateCompte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuCreateCompteActionPerformed(evt);
+                menuCreateCompteActionPerformed(evt);
             }
         });
-        jMenu7.add(MenuCreateCompte);
+        menuCompte.add(menuCreateCompte);
 
         MenuListCompte.setText("List");
         MenuListCompte.addActionListener(new java.awt.event.ActionListener() {
@@ -205,9 +235,9 @@ public class JframeHome extends javax.swing.JFrame {
                 MenuListCompteActionPerformed(evt);
             }
         });
-        jMenu7.add(MenuListCompte);
+        menuCompte.add(MenuListCompte);
 
-        jMenuBar1.add(jMenu7);
+        jMenuBar1.add(menuCompte);
 
         jMenu9.setText("A propos");
         jMenuBar1.add(jMenu9);
@@ -326,13 +356,13 @@ public class JframeHome extends javax.swing.JFrame {
         
     }//GEN-LAST:event_MenuListUtilisateurActionPerformed
 
-    private void MenuCreateCompteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCreateCompteActionPerformed
+    private void menuCreateCompteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCreateCompteActionPerformed
         // TODO add your handling code here:
         new JframeSaveCompte("add",0,this).setVisible(true);
         
         
         
-    }//GEN-LAST:event_MenuCreateCompteActionPerformed
+    }//GEN-LAST:event_menuCreateCompteActionPerformed
 
     private void MenuListCompteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuListCompteActionPerformed
         try {
@@ -340,6 +370,36 @@ public class JframeHome extends javax.swing.JFrame {
             
             whatMenu = "compte";
             
+            JframeHome jframehome = new JframeHome("utilisateur", idUser1);
+            
+            if (jframehome.getWhatProfile().equals("utilisateur")) {
+               
+                
+                int idUser = jframehome.getIdUser1();
+                
+                
+                List<Compte> listCompte = controleur.routeVersGetComptebyIdUser(idUser);
+                
+                DefaultTableModel model = new DefaultTableModel();
+            
+                model.addColumn("idCompte");
+                model.addColumn("Solde");
+                model.addColumn("idUser");
+                model.addColumn("idAdmin");
+                
+                for (Compte compte : listCompte) {
+                    
+                    model.addRow(new Object[]{compte.getIdcompte() + "", compte.getSolde(), compte.getIduser(), compte.getIdadmin()   });
+                }
+                
+                Table.setModel(model);
+                
+                
+            }
+                
+            
+            else {
+                
             List<Compte> listCompte = controleur.routeVersGetListCompte();
             
             DefaultTableModel model = new DefaultTableModel();
@@ -355,6 +415,8 @@ public class JframeHome extends javax.swing.JFrame {
             }
             
             Table.setModel(model);
+            
+            }
         } 
         
         catch (SQLException ex) {
@@ -369,7 +431,7 @@ public class JframeHome extends javax.swing.JFrame {
         
         TableModel model = Table.getModel();
         
-        if(whatMenu.equals("admin")) {
+        if (whatMenu.equals("admin")) {
             
             String idAdminString = model.getValueAt(lineNumber,0).toString();
             
@@ -432,23 +494,42 @@ public class JframeHome extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        //JframeHome jframehome = new JframeHome("utilisateur");
+        
+        //System.out.println(jframehome.getWhatProfile());
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 
-                new JframeHome().setVisible(true);
+                new JframeHome("admin",0).setVisible(true);
             }
         });
     }
 
+    public String getWhatMenu() {
+        return whatMenu;
+    }
+
+    public void setWhatMenu(String whatMenu) {
+        this.whatMenu = whatMenu;
+    }
+
+    public String getWhatProfile() {
+        return whatProfile;
+    }
+
+    public void setWhatProfile(String whatProfile) {
+        this.whatProfile = whatProfile;
+    }
+    
+    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu MenuAdmin;
-    private javax.swing.JMenuItem MenuCreateCompte;
     private javax.swing.JMenuItem MenuCreateUtilisateur;
     private javax.swing.JMenuItem MenuListAdmin;
     private javax.swing.JMenuItem MenuListCompte;
     private javax.swing.JMenuItem MenuListCreateAdmin;
     private javax.swing.JMenuItem MenuListUtilisateur;
-    private javax.swing.JMenu MenuUtilisateur;
     private javax.swing.JTable Table;
     private javax.swing.JList<String> jList1;
     private javax.swing.JList<String> jList2;
@@ -459,7 +540,6 @@ public class JframeHome extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
@@ -470,5 +550,10 @@ public class JframeHome extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JMenu menuAdmin;
+    private javax.swing.JMenu menuCompte;
+    private javax.swing.JMenuItem menuCreateCompte;
+    private javax.swing.JMenu menuUtilisateur;
     // End of variables declaration//GEN-END:variables
 }
+

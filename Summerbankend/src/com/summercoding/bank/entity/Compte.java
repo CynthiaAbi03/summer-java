@@ -158,6 +158,27 @@ public class Compte {
         return null;
     }
     
+    public List<Compte> getComptebyIdUser (int iduser) throws SQLException {
+        
+        String cmd = "SELECT * FROM `compte` WHERE iduser = ?";
+        
+           PreparedStatement stmt
+                = Jdbc.getConnexion().prepareStatement(cmd);
+           
+           stmt.setObject(1, iduser);
+            ResultSet rs = stmt.executeQuery();
+            
+            List<Compte> listComptebyId = new ArrayList<>();
+            
+            while(rs.next()) {
+                
+                listComptebyId.add(new Compte(rs.getInt(1), rs.getDouble(2),rs.getInt(3),rs.getInt(4)));
+            }
+            
+            return listComptebyId;
+           
+    }
+    
     public List<Compte> getAllCompte() throws SQLException {  //automatically returns a list of all the adminss  with their details
         
         String cmd = "SELECT * FROM `compte`";
@@ -193,7 +214,7 @@ public class Compte {
             Compte compte = new Compte();
             //compte.save(55000.77,3,10);
             
-            compte.update(1,900080.8,8,2);
+            //compte.update(1,900080.8,8,2);
             
             //String result = compte.getOne(3).toString();
             
@@ -201,7 +222,11 @@ public class Compte {
             
             //String result = compte.getBySoldeAndIduser(55000.77, 3).toString();
             
-            //System.out.println(result);
+            String result = compte.getComptebyIdUser(2).toString();
+            
+            System.out.println(result);
+            
+            
             
             
         } 
