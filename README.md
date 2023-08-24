@@ -1,2 +1,2 @@
 # summer-java
-Connecting SQL database to java code and veryfing important login and sigup entries with our database and also connecting the backend of our java code to front end interfaces
+Stand-Alone swing application connected to an SQL database. Our database has 3 entities or tables namely: Admin, Utilisateur(User), Compte(Account). Our java code contains all basic CRUD operations and more.
